@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>All Posts</h2>
+<p><a class="btn" href="{{ url_for('add_post') }}">Create Post</a></p>
+<table style="width:100%;border-collapse:collapse">
+  <tr><th>ID</th><th>Title</th><th>User</th><th>Channel</th><th>Likes</th></tr>
+  {% for p in posts %}
+  <tr><td>{{ p.post_id }}</td><td><a href="{{ url_for('view_post', post_id=p.post_id) }}">{{ p.title }}</a></td><td>{{ p.user_name }}</td><td>{{ p.channel_name }}</td><td>{{ p.likes }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

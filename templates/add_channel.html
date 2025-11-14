@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Create Channel</h2>
+<form method="post">
+  <label>channel_id: <input name="channel_id" required></label><br>
+  <label>channel_name: <input name="channel_name" required></label><br>
+  <label>description: <input name="description"></label><br>
+  <button class="btn" type="submit">Create</button>
+</form>
+{% endblock %}

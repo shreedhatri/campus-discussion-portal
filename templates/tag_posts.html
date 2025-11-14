@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>#{{ tag }}</h2>
+<p class="small">Posts tagged with "{{ tag }}"</p>
+<hr>
+
+{% if posts %}
+  {% for p in posts %}
+    <article class="card" style="margin-top:16px;">
+
+      <!-- HEADER -->
+      <div class="card-head">
+        <div class="avatar"></div>
+        <div>
+          <strong>{{ p.user_name }}</strong>
+          <span class="small">• {{ p.channel_name }}</span>
+          <div class="small">{{ p.Created_on }}</div>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="card-body">
+        <a href="{{ url_for('view_post', post_id=p.post_id) }}"
+           style="font-weight:700;color:#0f172a;text-decoration:none">
+          {{ p.title }}
+        </a>
+
+        <div style="margin-top:8px;">
+          {{ p.content }}
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="card-footer">
+        <a class="btn-muted"
+           href="{{ url_for('view_post', post_id=p.post_id) }}">
+          💬 View Post
+        </a>
+
+        <span class="small" style="margin-left:auto;">
+          {{ p.likes if p.likes else 0 }} Likes
+        </span>
+      </div>
+
+    </article>
+  {% endfor %}
+
+{% else %}
+  <p class="small" style="margin-top:20px;">No posts found under this tag.</p>
+{% endif %}
+
+{% endblock %}

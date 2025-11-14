@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Edit Post</h2>
+<form method="post">
+  <label>title: <input name="title" value="{{ post.title }}"></label><br>
+  <label>content: <textarea name="content" rows="6">{{ post.content }}</textarea></label><br>
+  <label>category: <input name="category" value="{{ post.category }}"></label><br>
+  <button class="btn" type="submit">Save</button>
+</form>
+{% endblock %}

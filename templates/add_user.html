@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Add User</h2>
+<form method="post">
+  <label>user_id: <input name="user_id" required></label><br>
+  <label>name: <input name="name" required></label><br>
+  <label>email: <input name="email"></label><br>
+  <label>password_hash: <input name="password_hash"></label><br>
+  <label>year: <input name="year" type="number"></label><br>
+  <label>department: <input name="department"></label><br>
+  <label>bio: <input name="bio"></label><br>
+  <label>created_on: <input name="created_on" type="date"></label><br>
+  <button type="submit">Add</button>
+</form>
+{% endblock %}

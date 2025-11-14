@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2 style="margin-bottom:10px">Tags</h2>
+
+<p>
+  <a class="btn" href="{{ url_for('add_post_tag') }}">
+    Add Tag to Post
+  </a>
+</p>
+
+<table style="border-collapse:collapse;width:100%;margin-top:10px">
+  <tr style="background:#f1f5f9">
+    <th style="padding:8px;border:1px solid #ddd">tag_id</th>
+    <th style="padding:8px;border:1px solid #ddd">tag_name</th>
+  </tr>
+
+  {% if tags %}
+    {% for t in tags %}
+      <tr>
+        <td style="padding:8px;border:1px solid #ddd">{{ t.tag_id }}</td>
+
+        <!-- CLICKABLE TAG NAME -->
+        <td style="padding:8px;border:1px solid #ddd">
+          <a href="{{ url_for('view_tag', tag_name=t.tag_name) }}"
+             style="text-decoration:none;color:var(--accent);font-weight:600">
+            {{ t.tag_name }}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+
+  {% else %}
+    <tr>
+      <td colspan="2"
+          style="padding:10px;text-align:center;color:#777;border:1px solid #ddd">
+        No tags found
+      </td>
+    </tr>
+  {% endif %}
+</table>
+
+{% endblock %}

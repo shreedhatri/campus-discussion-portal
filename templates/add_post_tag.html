@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Map Tag → Post</h2>
+<form method="post">
+  <label>Post:
+    <select name="Post_id">
+      {% for p in posts %}<option value="{{ p.post_id }}">{{ p.post_id }} - {{ p.title }}</option>{% endfor %}
+    </select>
+  </label><br>
+  <label>Tag:
+    <select name="Tag_id">
+      {% for t in tags %}<option value="{{ t.tag_id }}">{{ t.tag_id }} - {{ t.tag_name }}</option>{% endfor %}
+    </select>
+  </label><br>
+  <button class="btn" type="submit">Add Relation</button>
+</form>
+{% endblock %}

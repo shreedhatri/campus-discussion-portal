@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Posts in Channel {{ ch_id }}</h2>
+<table>
+  <tr><th>post_id</th><th>title</th><th>posted_by</th><th>Created_on</th></tr>
+  {% for r in rows %}
+  <tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[3] }}</td><td>{{ r[4] }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

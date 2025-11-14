@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Profile</h2>
+<form method="post">
+  <label>name: <input name="name" value="{{ user.name }}"></label><br>
+  <label>department: <input name="department" value="{{ user.department }}"></label><br>
+  <label>year: <input name="year" value="{{ user.year }}"></label><br>
+  <label>bio: <input name="bio" value="{{ user.bio }}"></label><br>
+  <button class="btn" type="submit">Save</button>
+</form>
+{% endblock %}

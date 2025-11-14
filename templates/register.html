@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+<div style="max-width:520px;margin:40px auto">
+  <div style="background:white;padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.06)">
+    
+    <h2 style="margin-bottom:6px">Create an account</h2>
+    <p class="small">Join your campus community</p>
+
+    <form method="post" action="{{ url_for('register') }}">
+
+      <!-- USER ID + NAME -->
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <div style="display:flex;gap:8px;">
+            <input class="input" name="name" placeholder="Full name" required>
+        </div>
+
+              
+        <input type="hidden" name="user_id" value="">
+
+      </div>
+
+      <!-- EMAIL -->
+      <div style="margin-top:10px">
+        <input class="input" name="email" placeholder="Email" required>
+      </div>
+
+      <!-- PASSWORD -->
+      <div style="margin-top:10px">
+        <input class="input" type="password" name="password" placeholder="Password" required>
+      </div>
+
+      <!-- DEPARTMENT + YEAR -->
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <input class="input" name="department" placeholder="Department">
+
+        <!-- FORCE YEAR TO BE NUMERIC ONLY -->
+        <input class="input" type="number" min="1" max="8"
+               name="year" placeholder="Year (e.g. 3)">
+      </div>
+
+      <!-- BIO -->
+      <div style="margin-top:10px">
+        <input class="input" name="bio" placeholder="Short bio">
+      </div>
+
+      <!-- SUBMIT -->
+      <div style="margin-top:14px">
+        <button class="btn" type="submit">Register</button>
+      </div>
+    </form>
+
+    <div style="margin-top:12px" class="small">
+      Already have an account?
+      <a href="{{ url_for('login') }}">Sign in</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

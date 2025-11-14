@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<div style="max-width:420px;margin:40px auto">
+  <div style="background:white;padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(15,23,42,0.06)">
+    <h2>Sign in to CampusConnect</h2>
+    <p class="small">Use your campus account</p>
+    <form method="post" action="{{ url_for('login') }}">
+      <div style="margin-top:12px"><input class="input" name="email" placeholder="Email" required></div>
+      <div style="margin-top:8px"><input class="input" type="password" name="password" placeholder="Password" required></div>
+      <div style="margin-top:12px"><button class="btn" type="submit">Sign in</button></div>
+    </form>
+    <div style="margin-top:12px" class="small">New? <a href="{{ url_for('register') }}">Create an account</a></div>
+  </div>
+</div>
+{% endblock %}

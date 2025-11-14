@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>All Comments</h2>
+<table>
+  <tr><th>comment_id</th><th>post_id</th><th>user_id</th><th>text</th><th>timestamp</th></tr>
+  {% for c in comments %}
+    <tr><td>{{ c.comment_id }}</td><td>{{ c.post_id }}</td><td>{{ c.user_id }}</td><td>{{ c.comment_text }}</td><td>{{ c.timestamp }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

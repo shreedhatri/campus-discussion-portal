@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CampusConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+  <body>
+    <div class="app">
+
+      <!-- ========== LEFT SIDEBAR ========== -->
+      <aside class="sidebar">
+
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+          <div class="logo">CC</div>
+          <div>
+            <div style="font-weight:800">CampusConnect</div>
+            <div class="small">University community</div>
+          </div>
+        </div>
+
+        <nav>
+          <a class="navlink" href="{{ url_for('index') }}">Home</a>
+          <a class="navlink" href="{{ url_for('channels') }}">Channels</a>
+          <a class="navlink" href="{{ url_for('posts') }}">Explore Posts</a>
+          <a class="navlink" href="{{ url_for('tags') }}">Tags</a>
+          <a class="navlink" href="{{ url_for('search') }}">Search</a>
+        </nav>
+
+        <div style="margin-top:14px">
+          {% if g.user %}
+            <div class="small">Signed in as</div>
+            <div style="margin-top:8px;font-weight:700;">{{ g.user.name }}</div>
+            <div class="small">{{ g.user.department }} • Year {{ g.user.year }}</div>
+
+            <p style="margin-top:12px">
+              <a class="btn" href="{{ url_for('profile') }}">Profile</a>
+            </p>
+
+            <p style="margin-top:6px">
+              <a class="navlink" href="{{ url_for('logout') }}">Logout</a>
+            </p>
+          {% else %}
+            <p style="margin-top:10px">
+              <a class="btn" href="{{ url_for('login') }}">Sign in</a>
+            </p>
+            <p style="margin-top:10px">
+              <a class="btn btn-muted" href="{{ url_for('register') }}">Register</a>
+            </p>
+          {% endif %}
+        </div>
+
+      </aside>
+      <!-- ========== END LEFT SIDEBAR ========== -->
+
+
+
+      <!-- ========== MAIN FEED AREA ========== -->
+      <main class="feed">
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div style="margin-bottom:10px;color:green">
+              {{ messages[0] }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% block body %}
+        {% endblock %}
+
+      </main>
+      <!-- ========== END MAIN ========== -->
+
+
+
+      <!-- ========== RIGHT SIDEBAR ========== -->
+      <aside class="rightcol">
+
+        <!-- Popular Tags -->
+        <div class="card-small">
+          <div style="font-weight:700">Discover</div>
+          <div class="small" style="margin-top:8px">Popular tags</div>
+
+          <div style="margin-top:10px">
+            {% if popular_tags %}
+              {% for t in popular_tags %}
+                <a href="{{ url_for('view_tag', tag_name=t.tag_name) }}"
+                   style="text-decoration:none;margin-right:8px;color:var(--accent)">
+                  #{{ t.tag_name }}
+                </a>
+              {% endfor %}
+            {% else %}
+              <div class="small" style="color:#999">No tags yet</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Quick Channels -->
+        <div class="card-small" style="margin-top:16px">
+          <div style="font-weight:700">Channels</div>
+          <div class="small" style="margin-top:8px">Quick access</div>
+
+          <ul style="padding-left:14px;margin-top:8px;">
+            {% if quick_channels %}
+              {% for c in quick_channels %}
+                <li class="small">
+                  <a href="{{ url_for('channel_messages', ch_id=c.channel_id) }}">
+                    {{ c.channel_name }}
+                  </a>
+                </li>
+              {% endfor %}
+            {% else %}
+              <li class="small" style="color:#999">No channels</li>
+            {% endif %}
+          </ul>
+
+        </div>
+
+      </aside>
+      <!-- ========== END RIGHT SIDEBAR ========== -->
+
+    </div>
+  </body>
+</html>

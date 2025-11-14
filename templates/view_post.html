@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<article class="card" style="margin-bottom:20px;">
+  <div class="card-head">
+    <div class="avatar"></div>
+    <div>
+      <div>
+        <span class="card-user">{{ post.user_name }}</span>
+        <span class="card-meta"> • {{ post.channel_name }}</span>
+      </div>
+      <div class="small">{{ post.Created_on }}</div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+  </div>
+
+  <div class="card-footer">
+    <form class="inline" method="post" action="{{ url_for('like_post', post_id=post.post_id) }}">
+      <button class="btn-muted" type="submit">♡ Like</button>
+    </form>
+    <span class="small">{{ post.likes }} Likes</span>
+  </div>
+</article>
+
+<!-- COMMENT FORM -->
+<div class="card" style="margin-bottom:20px;">
+  <h3>Write a Comment</h3>
+
+  {% if g.user %}
+  <form method="post">
+    <textarea class="input" name="comment_text" rows="3" placeholder="Write your comment..." required></textarea>
+    <button class="btn" type="submit" style="margin-top:8px;">Post Comment</button>
+  </form>
+  {% else %}
+    <p><a href="{{ url_for('login') }}">Log in</a> to comment</p>
+  {% endif %}
+</div>
+
+<!-- COMMENTS LIST -->
+<div class="card">
+  <h3>Comments</h3>
+
+  {% for c in comments %}
+    <div style="border-bottom:1px solid #eee;padding:10px 0;">
+      <strong>{{ c.user_name }}</strong>
+      <div class="small">{{ c.timestamp }}</div>
+      <p>{{ c.comment_text }}</p>
+    </div>
+  {% else %}
+    <p class="small">No comments yet.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

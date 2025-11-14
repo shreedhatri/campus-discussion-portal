@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Add Message</h2>
+<form method="post">
+  <label>message_id: <input name="message_id" required></label><br>
+  <label>user_id:
+    <select name="user_id">
+      {% for u in users %}
+      <option value="{{ u.user_id }}">{{ u.user_id }} - {{ u.name }}</option>
+      {% endfor %}
+    </select>
+  </label><br>
+  <label>channel_id:
+    <select name="channel_id">
+      {% for c in channels %}
+      <option value="{{ c.channel_id }}">{{ c.channel_id }} - {{ c.channel_name }}</option>
+      {% endfor %}
+    </select>
+  </label><br>
+  <label>message_text: <textarea name="message_text"></textarea></label><br>
+  <label>timestamp: <input name="timestamp" type="datetime-local"></label><br>
+  <button type="submit">Add Message</button>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Messages</h2>
+<a href="{{ url_for('add_message') }}">Add Message</a>
+<table>
+  <tr><th>message_id</th><th>user</th><th>channel</th><th>text</th><th>timestamp</th></tr>
+  {% for m in messages %}
+  <tr><td>{{ m.message_id }}</td><td>{{ m.user_name }}</td><td>{{ m.channel_name }}</td><td>{{ m.message_text }}</td><td>{{ m.timestamp }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

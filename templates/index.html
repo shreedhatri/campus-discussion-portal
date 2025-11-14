@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Recent Posts</h2>
+<p><a class="btn" href="{{ url_for('add_post') }}">Create Post</a></p>
+<table>
+  <tr><th>ID</th><th>Title</th><th>Author</th><th>Channel</th><th>Likes</th><th>Created</th></tr>
+  {% for p in posts %}
+  <tr>
+    <td>{{ p.post_id }}</td>
+    <td><a href="{{ url_for('view_post', post_id=p.post_id) }}">{{ p.title }}</a></td>
+    <td>{{ p.user_name }}</td>
+    <td>{{ p.channel_name }}</td>
+    <td>{{ p.likes }}</td>
+    <td class="small">{{ p.Created_on }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

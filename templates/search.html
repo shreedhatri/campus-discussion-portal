@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Search</h2>
+
+<form method="get" action="{{ url_for('search') }}">
+  <input class="input" name="q" value="{{ q }}" 
+         placeholder="Search users, channels, posts, tags"
+         style="width:260px">
+  <button class="btn" type="submit">Search</button>
+</form>
+
+{% if q %}
+  <p class="small" style="margin-top:8px">
+    Results for: <strong>"{{ q }}"</strong>
+  </p>
+{% endif %}
+
+<hr style="margin:20px 0">
+
+<!-- USERS -->
+<h3>Users</h3>
+{% if results.users %}
+  <ul>
+    {% for u in results.users %}
+      <li>
+        <strong>{{ u.name }}</strong> 
+        (ID: {{ u.user_id }})
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="small">No users found.</p>
+{% endif %}
+
+
+<!-- CHANNELS -->
+<h3>Channels</h3>
+{% if results.channels %}
+  <ul>
+    {% for c in results.channels %}
+      <li>
+        <a href="{{ url_for('channel_messages', ch_id=c.channel_id) }}">
+          {{ c.channel_name }}
+        </a>
+        (ID: {{ c.channel_id }})
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="small">No channels found.</p>
+{% endif %}
+
+
+<!-- POSTS -->
+<h3>Posts</h3>
+{% if results.posts %}
+  <ul>
+    {% for p in results.posts %}
+      <li>
+        <a href="{{ url_for('view_post', post_id=p.post_id) }}">
+          {{ p.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="small">No posts found.</p>
+{% endif %}
+
+
+<!-- TAGGED POSTS -->
+<h3>Posts tagged "{{ q }}"</h3>
+{% if results.tagged_posts %}
+  <ul>
+    {% for p in results.tagged_posts %}
+      <li>
+        <a href="{{ url_for('view_post', post_id=p.post_id) }}">
+          {{ p.title }}
+        </a>
+        <span class="small">(#{{ p.tag_name }})</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="small">No posts found for this tag.</p>
+{% endif %}
+
+{% endblock %}

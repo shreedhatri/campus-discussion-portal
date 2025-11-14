@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Add Comment</h2>
+<form method="post">
+  <label>comment_id: <input name="comment_id" required></label><br>
+  <label>post_id:
+    <select name="post_id">
+      {% for p in posts %}
+      <option value="{{ p.post_id }}">{{ p.post_id }} - {{ p.title }}</option>
+      {% endfor %}
+    </select>
+  </label><br>
+  <label>user_id:
+    <select name="user_id">
+      {% for u in users %}
+      <option value="{{ u.user_id }}">{{ u.user_id }} - {{ u.name }}</option>
+      {% endfor %}
+    </select>
+  </label><br>
+  <label>comment_text: <textarea name="comment_text"></textarea></label><br>
+  <label>timestamp: <input name="timestamp" type="datetime-local"></label><br>
+  <button type="submit">Add Comment</button>
+</form>
+{% endblock %}
